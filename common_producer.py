@@ -7,8 +7,6 @@ from .mock_server_logs import generate_mock_logs
 from .mock_transactions import generate_mock_transactions
 
 KAFKA_BROKER_URL = os.environ.get("KAFKA_BROKER_URL")
-
-KAFKA_BROKER_URL = os.environ.get("KAFKA_BROKER_URL")
 TRANSACTIONS_TOPIC = os.environ.get("TRANSACTIONS_TOPIC")
 RATINGS_TOPIC = os.environ.get("RATINGS_TOPIC")
 LOGS_TOPIC = os.environ.get("LOGS_TOPIC")

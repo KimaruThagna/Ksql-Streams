@@ -15,3 +15,6 @@ The use cases covered will be:
 
 **Topic** A structure that represents the current state of data coming into a stream. 
 Consider it as the sum total of all events in the stream at a certain point in time. Just like a normal SQL table. Good for aggregate and grouping analysis
+
+# Producer
+The producer for this demo is in `common_producer.py`. This will produce transactions logs and rating records for the KSQL Demo.
