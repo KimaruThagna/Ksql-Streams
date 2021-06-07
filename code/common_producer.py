@@ -1,6 +1,5 @@
-import os, time, json
+import os, json
 from kafka import KafkaProducer
-from random import choices, randint
 from .mock_ratings import generate_mock_product_ratings
 from .mock_server_logs import generate_mock_logs
 from .mock_transactions import generate_mock_transactions
