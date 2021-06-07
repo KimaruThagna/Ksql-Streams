@@ -32,3 +32,38 @@ Spin the app cluster that contains producer code
 ```
  docker-compose up
 ```
+
+# Inspect different topics
+
+## Transaction topic
+
+```
+docker-compose -f docker-compose.kafka.yml exec broker kafka-console-consumer --bootstrap-server localhost:9092 --topic transactions_topic
+```
+
+## Logs topic
+
+```
+docker-compose -f docker-compose.kafka.yml exec broker kafka-console-consumer --bootstrap-server localhost:9092 --topic logs_topic
+```
+
+## Ratings topic
+
+```
+docker-compose -f docker-compose.kafka.yml exec broker kafka-console-consumer --bootstrap-server localhost:9092 --topic ratings_topic
+```
+
+# KSQL Interactions
+
+To connect to the KSQL CLI, run the command
+
+# Tear down
+To bring down kafka cluster `docker-compose -d docker-compose.kafka.yaml down`
+
+To bring down project 
+
+`docker-compose down` 
+
+To remove project network
+
+`docker network rm kafka-network` 
