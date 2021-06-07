@@ -57,6 +57,37 @@ docker-compose -f docker-compose.kafka.yml exec broker kafka-console-consumer --
 
 To connect to the KSQL CLI, run the command
 
+## Create Stream and Tables
+### Log Topic
+A stream will monitor errors from  `logs_topic` and record when there is an error status 5 or more times within a 1 minute window.
+
+
+
+A table would be used to store the total number of events per status from beginning till now.
+
+
+## Transactions Topic
+
+This stream will be created to filter out withdrawals above 1,000,000 as possible transactions of concern
+
+
+A table can store records of possible illegal withdrawals where there are withdrawals of over 5,000,000 within 1 day.
+
+
+
+A table can be generated to store the running sum of withdrawal and deposit amounts for each user.
+
+
+
+## Ratings Topic
+
+A stream can be created to record bad ratings where the value is less than 3.
+
+
+
+A table can be created to rank the worst performing products by ratings
+
+
 # Tear down
 To bring down kafka cluster `docker-compose -d docker-compose.kafka.yaml down`
 
