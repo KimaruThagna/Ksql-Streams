@@ -1,7 +1,6 @@
 import os, time, json
 from kafka import KafkaProducer
 from random import choices, randint
-from string import ascii_letters, digits
 from .mock_ratings import generate_mock_product_ratings
 from .mock_server_logs import generate_mock_logs
 from .mock_transactions import generate_mock_transactions
