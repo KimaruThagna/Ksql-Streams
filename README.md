@@ -71,7 +71,7 @@ A table would be used to store the total number of events per status from beginn
 This stream will be created to filter out withdrawals above 1,000,000 as possible transactions of concern
 
 
-A table can store records of possible illegal withdrawals where there are withdrawals of over 5,000,000 within 1 day.
+A table can store records of possible illegal withdrawals where there are withdrawals of over 5,000,000 within 1 day per user.
 
 
 
