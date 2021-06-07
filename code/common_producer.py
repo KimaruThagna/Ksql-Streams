@@ -20,6 +20,9 @@ while True:
     rating = generate_mock_product_ratings()
     log = generate_mock_logs()
     # Kafka messages are sent in bytes
+    print("sending to transactions topic")
     producer.send(TRANSACTIONS_TOPIC, value=transaction) 
+    print("sending to logs topic")
     producer.send(LOGS_TOPIC, value=log) 
+    print("sending to ratings topic")
     producer.send(RATINGS_TOPIC, value=rating) 

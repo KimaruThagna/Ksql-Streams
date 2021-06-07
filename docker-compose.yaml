@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+    
+    producer:
+        build: ./code
+        environment:
+            KAFKA_BROKER_URL: broker:9092
+            TRANSACTIONS_TOPIC: transactions_topic
+            LOGS_TOPIC: logs_topic
+            RATINGS_TOPIC: ratings_topic
+           
+
+    
+# Give this composition access to the Kafka network
+networks:
+  default:
+    external:
+      name: kafka-network
