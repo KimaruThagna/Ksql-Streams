@@ -18,3 +18,17 @@ Consider it as the sum total of all events in the stream at a certain point in t
 
 # Producer
 The producer for this demo is in `common_producer.py`. This will produce transactions logs and rating records for the KSQL Demo.
+
+# Setup
+The setup involves 2 `docker-compose` files. One that spins up the KAFKA clusters, ksqldb and ksql-CLI instances and one that spins the local project that contains the producer.
+
+Spin the Kafka cluster
+``` 
+docker-compose -f docker-compose.kafka.yaml up
+```
+
+Spin the app cluster that contains producer code
+
+```
+ docker-compose up
+```
