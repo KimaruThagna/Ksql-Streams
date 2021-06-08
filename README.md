@@ -58,8 +58,9 @@ docker-compose -f docker-compose.kafka.yml exec broker kafka-console-consumer --
 
 # KSQL Interactions
 
-To connect to the KSQL CLI, run the command
-
+To connect to the KSQL CLI, you have to connect to the KSQL_CLI docker container. Find the container ID of the CLI container and run the command `docker exec -it <container-id> /bin/ksql http://ksqldb-server:8088
+`
+To list topics, `PRINT TOPICS;`
 ## Create Stream and Tables
 ### Log Topic
 A stream will monitor errors from  `logs_topic` and record when there is an error status 5 or more times within a 1 minute window.
@@ -92,12 +93,15 @@ A table can be created to rank the worst performing products by ratings
 
 
 # Tear down
+
+To remove project network
+
+`docker network rm kafka-network` 
+
 To bring down kafka cluster `docker-compose -d docker-compose.kafka.yaml down`
 
 To bring down project 
 
 `docker-compose down` 
 
-To remove project network
 
-`docker network rm kafka-network` 
