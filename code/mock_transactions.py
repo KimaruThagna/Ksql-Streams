@@ -10,8 +10,8 @@ def generate_mock_transactions():
     return {
         "action": action[randint(0,1)],
         "user-id": randint(1, 50),
-        "tx_id": f'TX-#{randint(10000000,90000000000)}',
+        "tx_id": f'TX-#{randint(10000000,90000000000)}M{randint(1000,90000000000)}',
         "amount": randint(700000,10000000),
-        "timestamp": datetime.timestamp()
+        "timestamp": datetime.now().timestamp()
         
     }

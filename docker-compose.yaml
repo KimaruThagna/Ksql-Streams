@@ -4,6 +4,8 @@ services:
     
     producer:
         build: ./code
+        volumes:
+          - ./code:/app
         environment:
             KAFKA_BROKER_URL: broker:9092
             TRANSACTIONS_TOPIC: transactions_topic
