@@ -21,7 +21,10 @@ The producer for this demo is in `common_producer.py`. This will produce transac
 
 # Setup
 The setup involves 2 `docker-compose` files. One that spins up the KAFKA clusters, ksqldb and ksql-CLI instances and one that spins the local project that contains the producer.
-
+Create external network
+```
+docker network create kafka-network
+```
 Spin the Kafka cluster
 ``` 
 docker-compose -f docker-compose.kafka.yaml up
