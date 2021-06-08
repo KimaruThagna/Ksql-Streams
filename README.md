@@ -63,34 +63,48 @@ To connect to the KSQL CLI, you have to connect to the KSQL_CLI docker container
 To list topics, `PRINT TOPICS;`
 ## Create Stream and Tables
 ### Log Topic
-A stream will monitor errors from  `logs_topic` and record when there is an error status 5 or more times within a 1 minute window.
-
+A stream will monitor errors from  `logs_topic` and record when there is an error status 5 or more times within a 30 second window.
+```
+ SELECT STATUS, COUNT(STATUS) AS ERR_COUNT FROM LOGS_STREAM  WINDOW TUMBLING (SIZE 30 SECONDS) GROUP BY STATUS HAVING COUNT(STATUS)>5 AND STATUS='ERROR'  EMIT CHANGES;
+```
 
 
 A table would be used to store the total number of events per status from beginning till now.
-
+```
+CREATE TABLE status_count_tab AS SELECT STATUS, COUNT(STATUS) AS ERR_COUNT FROM LOGS_STREAM GROUP BY STATUS EMIT CHANGES;
+```
 
 ## Transactions Topic
 
 This stream will be created to filter out withdrawals above 1,000,000 as possible transactions of concern
-
+```
+SELECT * FROM TRANSACTIONS_STREAM WHERE AMOUNT > 1000000 AND ACTION='WITHDRAWAL' EMIT CHANGES;
+```
 
 A table can store records of possible illegal withdrawals where there are withdrawals of over 5,000,000 within 1 day per user.
-
+```
+CREATE TABLE possible_illegal_Tnx AS SELECT USERID,ACTION, SUM(AMOUNT) AS TOTAL_WITDRAWAL FROM TRANSACTIONS_STREAM WINDOW TUMBLING (SIZE 24 HOURS ) GROUP BY USERID,ACTION HAVING SUM(AMOUNT)>5000000 AND ACTION='WITHDRAWAL';
+```
 
 
 A table can be generated to store the running sum of withdrawal and deposit amounts for each user.
 
-
+```
+CREATE TABLE activity_table AS SELECT ACTION, SUM(AMOUNT) AS TRANSACTED_AMOUNT FROM TRANSACTIONS_STREAM GROUP BY ACTION EMIT CHANGES;
+```
 
 ## Ratings Topic
 
 A stream can be created to record bad ratings where the value is less than 3.
-
+```
+SELECT * FROM RATINGS_STREAM WHERE RATING <3 EMIT CHANGES;
+```
 
 
 A table can be created to rank the worst performing products by ratings
-
+```
+CREATE TABLE BAD_PRODUCT_REVIEWS_T AS SELECT PRODUCTID,AVG(RATING) AS RATING FROM RATINGS_STREAM WHERE RATING<3 GROUP BY PRODUCTID;
+```
 
 # Tear down
 
@@ -104,4 +118,6 @@ To bring down project
 
 `docker-compose down` 
 
+# Sample Screens
 
+You can view the KSQL interactions as screenshots in the `screens` folder.
