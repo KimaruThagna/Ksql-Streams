@@ -131,4 +131,29 @@ You can view the KSQL interactions as screenshots in the `screens` folder.
 ![rating table](screens/tx.png)
 
 # Further Reading- KSQL-Python API
-You can interact with KSQL from a Python script using the `ksql-python` library that is built on top of the KSQL REST API resource
+You can interact with KSQL from a Python script using the `ksql-python` library that is built on top of the KSQL REST API resource. Below are sample interactions with the resource
+```python
+from ksql import KSQLAPI
+
+client = KSQLAPI('http://ksqldb-server:8088')
+# the param is the URL to your KSQL DB server. Locally or remote
+# sample query
+query = client.query("SELECT * FROM TRANSACTIONS_STREAM WHERE AMOUNT > 1000000 AND ACTION='WITHDRAWAL' ")
+for row in query:
+    print(row)
+# create stream
+
+client.create_stream(table_name='transactions_stream',
+columns_type=['Tx_id bigint', 'Timestamp varchar', 'User varchar', 'Amount double', 'Action Varchar'],
+topic='transactions_topic',
+value_format='JSON')
+
+# create stream with predicate conditions
+
+client.create_stream_as(table_name='ratings_avro',
+                     select_columns=['rating','productid','userid' ],
+                     src_table='ratings_stream',
+                     conditions='rating < 3',
+                     kafka_topic='ratings_topic',
+                     value_format='AVRO')
+```
