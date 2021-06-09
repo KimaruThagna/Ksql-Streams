@@ -121,3 +121,14 @@ To bring down project
 # Sample Screens
 
 You can view the KSQL interactions as screenshots in the `screens` folder.
+## Product Rating Table
+![rating table](screens/rating.png)
+
+## Error Stream
+![rating table](screens/err.png)
+
+## Transaction Stream
+![rating table](screens/tx.png)
+
+# Further Reading- KSQL-Python API
+You can interact with KSQL from a Python script using the `ksql-python` library that is built on top of the KSQL REST API resource
